@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Design tokens — "Serene Clinical & Palliative Care" (Google Stitch DESIGN.md)
+   ========================================================================== */
+:root {
+  /* Cores (Material 3 do protótipo) */
+  --surface: #fcf9f2;
+  --surface-dim: #dcdad3;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f6f3ec;
+  --surface-container: #f1eee7;
+  --surface-container-high: #ebe8e1;
+  --surface-container-highest: #e5e2db;
+  --on-surface: #1c1c18;
+  --on-surface-variant: #404848;
+  --outline: #707979;
+  --outline-variant: #bfc8c8;
+  --border-warm: #e2dfd8;
+
+  --primary: #003638;
+  --on-primary: #ffffff;
+  --primary-container: #164e50;
+  --on-primary-container: #8abec0;
+  --primary-fixed: #b7ecee;
+  --on-primary-fixed-variant: #164e50;
+
+  --secondary: #406840;
+  --secondary-container: #beecb9;
+  --sage: #7ca982;
+  --sage-soft: #d8e2dc;
+
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  /* Tipografia */
+  --font-serif: "Domine", Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Espaçamentos */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.75rem;
+  --space-xl: 2.5rem;
+  --gutter: 1.5rem;
+  --margin-desktop: 3.5rem;
+  --container: 80rem; /* 1280px */
+  --header-h: 5rem;
+
+  /* Raios (mesma escala usada no code.html exportado) */
+  --radius-sm: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-header: 0 1px 8px rgba(22, 78, 80, 0.05);
+  --shadow-elevated: 0 12px 28px -6px rgba(22, 78, 80, 0.08), 0 4px 12px -2px rgba(22, 78, 80, 0.04);
+  --focus-ring: 0 0 0 4px rgba(22, 78, 80, 0.12);
+
+  --ease: 200ms ease;
+}

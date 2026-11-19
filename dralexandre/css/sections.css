@@ -1,0 +1,381 @@
+/* ==========================================================================
+   Seções da landing page
+   Ideia central: o tempo de consulta (60 a 90 minutos) é o elemento principal,
+   desenhado como um relógio. O arco, forma de porta e de casa, aparece na foto,
+   na marca e no fechamento da página.
+   ========================================================================== */
+
+.split > *, .about > *, .places > *, .faq > *, .hero__inner > * { min-width: 0; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(60rem 40rem at 85% 20%, rgba(155, 208, 210, 0.16), transparent 60%),
+    radial-gradient(40rem 30rem at 0% 100%, rgba(0, 32, 33, 0.35), transparent 70%),
+    var(--primary-container);
+  color: var(--surface);
+  padding-top: var(--header-h);
+  overflow: hidden;
+}
+.hero__inner {
+  max-width: calc(var(--container) + 2 * var(--margin-desktop));
+  margin-inline: auto;
+  padding: 2.5rem var(--gutter) 3.5rem;
+  display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center;
+}
+.hero__content { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+.hero__kicker {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--primary-fixed-dim, #9bd0d2);
+}
+.hero__title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 1.2rem + 3.6vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  max-width: 17ch;
+  text-wrap: balance;
+  color: var(--surface);
+}
+.hero__lead { color: rgba(252, 249, 242, 0.78); max-width: 34rem; }
+.hero__actions { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; padding-top: 0.25rem; }
+.hero__features {
+  width: 100%; max-width: 36rem;
+  display: grid; grid-template-columns: 1fr; gap: 0 2rem;
+  margin-top: 0.75rem;
+  color: rgba(252, 249, 242, 0.88);
+}
+.hero__features li {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.875rem 0;
+  border-top: 1px solid rgba(252, 249, 242, 0.14);
+}
+.hero__features .icon { color: #a5d2a2; }
+
+.hero__media {
+  position: relative;
+  justify-self: center;
+  width: 100%; max-width: 21rem;
+  margin-bottom: 1rem;
+}
+.arch { margin: 0; position: relative; }
+.arch::before {
+  content: ""; position: absolute; inset: -0.875rem -0.875rem 3.75rem;
+  border: 1.5px solid rgba(252, 249, 242, 0.22);
+  border-radius: 50% 50% 1.75rem 1.75rem / 40% 40% 1.75rem 1.75rem;
+  pointer-events: none;
+}
+.arch__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 50% 50% 1.5rem 1.5rem / 40% 40% 1.5rem 1.5rem;
+  background: var(--primary);
+  box-shadow: 0 30px 60px -20px rgba(0, 20, 21, 0.55);
+}
+.arch__frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.arch__frame .img-fallback { height: 100%; aspect-ratio: auto; }
+.arch__caption {
+  display: flex; flex-direction: column; align-items: flex-end; text-align: right;
+  gap: 0.125rem; padding-top: 1.25rem;
+  color: rgba(252, 249, 242, 0.7);
+}
+.arch__name { font-family: var(--font-serif); font-weight: 600; font-size: 1.125rem; color: var(--surface); }
+
+/* Relógio de 90 minutos */
+.dial {
+  position: absolute; left: -1rem; bottom: 3.5rem;
+  width: 9rem; aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 24px 48px -16px rgba(0, 20, 21, 0.55);
+  animation: dial-in 700ms 150ms cubic-bezier(.2, .8, .2, 1) both;
+}
+.dial__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dial__track { fill: none; stroke: var(--surface-container-high); stroke-width: 7; }
+.dial__arc {
+  fill: none; stroke: var(--primary-container); stroke-width: 7; stroke-linecap: round;
+  stroke-dasharray: 100; stroke-dashoffset: 0;
+  transform: rotate(-90deg); transform-origin: 100px 100px;
+  animation: dial-draw 1.8s 450ms cubic-bezier(.55, .1, .25, 1) both;
+}
+.dial__ticks line { stroke: var(--outline-variant); stroke-width: 2; stroke-linecap: round; }
+.dial__dot { fill: #7ca982; stroke: var(--surface); stroke-width: 3; animation: fade-in 400ms 1.4s both; }
+.dial__center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 1.5rem;
+}
+.dial__value { font-family: var(--font-serif); font-weight: 600; font-size: 1.5rem; line-height: 1.1; color: var(--primary); letter-spacing: -0.02em; }
+.dial__unit { font-size: 0.6875rem; line-height: 1.2; font-weight: 600; color: var(--on-surface-variant); margin-top: 0.25rem; max-width: 5.5rem; }
+
+@keyframes dial-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes dial-in { from { opacity: 0; transform: scale(0.85) rotate(-12deg); } }
+
+.compliance-bar {
+  border-top: 1px solid rgba(252, 249, 242, 0.12);
+  padding: 0.875rem var(--gutter);
+  text-align: center;
+}
+.compliance-bar p { color: rgba(252, 249, 242, 0.6); max-width: 60rem; margin-inline: auto; }
+
+@media (min-width: 640px) {
+  .hero__actions { flex-direction: row; flex-wrap: wrap; width: auto; }
+  .hero__features { grid-template-columns: 1fr 1fr; }
+  .hero__media { max-width: 25rem; }
+  .dial { width: 10.5rem; left: -3rem; }
+  .dial__value { font-size: 1.75rem; }
+  .dial__unit { font-size: 0.75rem; max-width: 6.5rem; }
+}
+@media (min-width: 768px) {
+  .hero__inner { padding-inline: var(--margin-desktop); }
+  .compliance-bar { padding-inline: var(--margin-desktop); }
+}
+@media (min-width: 1024px) {
+  .hero__inner { grid-template-columns: 7fr 5fr; gap: 4rem; padding-top: 4.5rem; padding-bottom: 5.5rem; }
+  .hero__media { justify-self: end; max-width: 27rem; }
+  .dial { width: 12rem; left: -5.5rem; bottom: 5rem; }
+  .dial__value { font-size: 2rem; }
+  .dial__unit { max-width: 7rem; }
+}
+
+/* ---------- Cabeçalho de seção ---------- */
+.section-head { max-width: 44rem; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 3rem; }
+.section-head .kicker { margin-bottom: 0; }
+
+/* ---------- Quando procurar o geriatra ---------- */
+.split { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+.split__aside .sticky { display: flex; flex-direction: column; gap: 1rem; }
+.directive {
+  margin-top: 1.25rem;
+  background: var(--surface-container-low);
+  border-left: 4px solid var(--sage);
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  padding: 1.5rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;
+}
+.directive .btn { margin-top: 0.25rem; }
+
+/* Especialidades: um único cartão em lista */
+.topics {
+  margin: 0; padding: 0.5rem; list-style: none;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-elevated);
+}
+.topic {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-xl);
+  transition: background-color 250ms ease, padding-left 250ms cubic-bezier(.2,.8,.2,1);
+}
+.topic + .topic { border-top: 1px solid var(--border-warm); }
+.topic:hover + .topic, .topic:hover { border-top-color: transparent; }
+.topic__icon {
+  flex-shrink: 0; width: 2.75rem; height: 2.75rem; border-radius: var(--radius-xl);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sage-soft); color: var(--primary-container);
+  transition: background-color 250ms ease, color 250ms ease, transform 250ms cubic-bezier(.2,.8,.2,1);
+}
+.topic h3 { color: var(--primary); margin: 0; font-size: 1.0625rem; line-height: 1.35; }
+.topic:hover { background: var(--surface-container-low); padding-left: 1.375rem; }
+.topic:hover .topic__icon { background: var(--primary-container); color: var(--on-primary); transform: rotate(-6deg); }
+@media (prefers-reduced-motion: reduce) {
+  .topic, .topic__icon { transition: none; }
+  .topic:hover .topic__icon { transform: none; }
+}
+
+/* Botão flutuante do WhatsApp */
+.wa-float {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 90;
+  width: 3.5rem; height: 3.5rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #25d366; color: #fff;
+  box-shadow: 0 8px 24px -6px rgba(0,0,0,.3);
+  transition: transform 250ms cubic-bezier(.2,.8,.2,1), box-shadow 250ms ease;
+  animation: wa-in 500ms cubic-bezier(.2,.8,.2,1) 600ms both;
+}
+.wa-float svg { width: 1.875rem; height: 1.875rem; }
+.wa-float::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: #25d366; z-index: -1; animation: wa-pulse 2.4s ease-out infinite;
+}
+.wa-float:hover { transform: scale(1.08); box-shadow: 0 12px 28px -6px rgba(0,0,0,.35); }
+.wa-float:focus-visible { outline: 3px solid var(--primary-container); outline-offset: 3px; }
+@keyframes wa-in { from { opacity: 0; transform: scale(.5) translateY(20px); } }
+@keyframes wa-pulse { 0% { transform: scale(1); opacity: .5; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .wa-float, .wa-float::before { animation: none; } }
+
+@media (min-width: 1024px) {
+  .split { grid-template-columns: 5fr 7fr; gap: 5rem; }
+  .split__aside .sticky { position: sticky; top: calc(var(--header-h) + 2rem); }
+}
+
+/* ---------- Sobre o médico ---------- */
+.about { display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center; }
+.about__content { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+.about__content .kicker { margin-bottom: -0.25rem; }
+
+.quote {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 4px solid var(--sage);
+}
+.quote p {
+  font-family: var(--font-serif);
+  font-size: 1.375rem; line-height: 1.5; font-weight: 500;
+  color: var(--primary-container);
+}
+
+.timeline { list-style: none; padding: 0; margin: 0.5rem 0 0; width: 100%; }
+.timeline__item {
+  position: relative;
+  display: grid; grid-template-columns: 2.75rem 1fr; gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+.timeline__item:not(:last-child)::before {
+  content: ""; position: absolute; left: calc(1.375rem - 1px); top: 2.75rem; bottom: 0;
+  width: 2px; background: var(--sage-soft);
+}
+.timeline__icon {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface); color: var(--primary-container);
+  box-shadow: inset 0 0 0 1.5px var(--sage);
+}
+.timeline__item h3 { margin: 0.5rem 0 0.25rem; }
+.about__footer { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; padding-top: 0.25rem; }
+
+.about__media { margin: 0; position: relative; justify-self: center; width: 100%; max-width: 24rem; }
+.about__media::before {
+  content: ""; position: absolute; inset: 1.5rem -1.5rem -1.5rem 1.5rem;
+  background: var(--sage-soft); border-radius: var(--radius-2xl);
+}
+.about__frame {
+  position: relative; overflow: hidden; border-radius: var(--radius-2xl);
+  aspect-ratio: 4 / 5; background: var(--surface-container);
+  box-shadow: var(--shadow-elevated);
+}
+.about__frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.about__frame .img-fallback { height: 100%; aspect-ratio: auto; }
+.about__caption {
+  position: relative;
+  display: flex; align-items: center; gap: 0.875rem;
+  margin: -2.5rem 1rem 0; padding: 1rem 1.25rem;
+  background: var(--surface); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated), var(--shadow-md);
+}
+.about__caption > .icon { color: var(--secondary); }
+.about__caption strong { display: block; color: var(--primary); }
+.about__caption .t-label-sm { color: var(--on-surface-variant); }
+
+@media (min-width: 1024px) {
+  .about { grid-template-columns: 7fr 5fr; gap: 6rem; }
+  .about__media { justify-self: end; max-width: 26rem; }
+  .about__caption { position: absolute; left: -3rem; right: auto; bottom: 2.5rem; margin: 0; }
+}
+
+/* ---------- Locais de atendimento ---------- */
+.places { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+.places__list { display: flex; flex-direction: column; gap: 1.25rem; }
+.place {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-2xl);
+  padding: 1.5rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+}
+.place__head { display: flex; align-items: center; gap: 1rem; }
+.place__icon {
+  width: 3rem; height: 3rem; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface-container); color: var(--primary);
+}
+.place__list { display: flex; flex-direction: column; gap: 0.5rem; color: var(--on-surface-variant); }
+.place__list li { display: flex; align-items: flex-start; gap: 0.625rem; }
+.place__list .icon { color: var(--secondary); margin-top: 0.125rem; }
+.place .btn { margin-top: 0.25rem; }
+@media (min-width: 640px) { .place { padding: 1.75rem; } }
+@media (min-width: 1024px) {
+  .places { grid-template-columns: 5fr 7fr; gap: 2rem; align-items: stretch; }
+}
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+.faq__head { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+.faq__head .kicker { margin-bottom: 0; }
+.faq__head .text-link { margin-top: 0.75rem; }
+@media (min-width: 1024px) {
+  .faq { grid-template-columns: 4fr 8fr; gap: 5rem; }
+  .faq__head { position: sticky; top: calc(var(--header-h) + 2rem); align-self: start; }
+}
+
+/* ---------- CTA final ---------- */
+.cta-wrap { padding-top: 0; }
+@media (min-width: 1024px) { .cta-wrap { padding-top: 0; } }
+.cta {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--primary-container); color: var(--surface);
+  border-radius: 2rem;
+  padding: 3rem 1.5rem;
+  display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;
+}
+.cta__arch {
+  position: absolute; right: -4rem; bottom: -1px; z-index: -1;
+  height: 115%; width: auto;
+  color: rgba(252, 249, 242, 0.1);
+  pointer-events: none;
+}
+.cta__text { display: flex; flex-direction: column; gap: 1rem; max-width: 36rem; }
+.cta h2 { color: var(--surface); }
+.cta__text p { color: rgba(252, 249, 242, 0.78); }
+.cta__actions { display: flex; flex-direction: column; gap: 0.75rem; }
+.cta__actions .btn { width: 100%; }
+@media (min-width: 640px) { .cta { padding: 3.5rem 3rem; } }
+@media (min-width: 1024px) {
+  .cta { grid-template-columns: 7fr 4fr; gap: 4rem; padding: 4.5rem 4.5rem; }
+}
+
+/* ---------- Rodapé ---------- */
+.site-footer {
+  background: var(--primary); color: var(--surface);
+  padding: 4rem var(--gutter) 2rem;
+}
+@media (min-width: 768px) { .site-footer { padding-inline: var(--margin-desktop); } }
+.footer__grid {
+  display: grid; grid-template-columns: 1fr; gap: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+.footer__col { display: flex; flex-direction: column; gap: 0.75rem; }
+.footer__name { font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.35; font-weight: 500; }
+.footer__col p, .footer__nav a { color: var(--on-primary-container); }
+.footer__title { color: var(--surface); }
+.footer__nav { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer__nav a, .footer__legal a { transition: color var(--ease); }
+.footer__nav a:hover, .footer__legal a:hover { color: var(--surface); }
+.footer__badges { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding-top: 0.25rem; }
+.footer__contact { display: flex; flex-direction: column; gap: 0.25rem; color: var(--on-primary-container); }
+.footer__contact .t-label-md { color: var(--surface); }
+.footer__bottom {
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(252, 249, 242, 0.1);
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  gap: 1rem; text-align: center;
+}
+.footer__bottom p { color: rgba(138, 190, 192, 0.85); }
+.footer__legal { display: flex; align-items: center; gap: 1rem; color: var(--on-primary-container); flex-shrink: 0; }
+@media (min-width: 768px) {
+  .footer__grid { grid-template-columns: 5fr 3fr 4fr; }
+  .footer__bottom { flex-direction: row; text-align: left; }
+}
+
+/* Fallback caso a foto não carregue */
+.img-fallback {
+  width: 100%; aspect-ratio: 4 / 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
+  color: var(--primary); background: linear-gradient(160deg, var(--surface-container-high), var(--sage-soft));
+}
+.img-fallback .icon { font-size: 64px; opacity: 0.6; }
